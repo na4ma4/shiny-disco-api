@@ -1,0 +1,27 @@
+syntax = "proto3";
+
+package shinydisco.api.v1;
+
+option go_package = "github.com/na4ma4/shiny-disco-api;shiny_disco_api";
+
+message Message {
+    oneof message {
+        ServiceRegister service_register = 100;
+        ServiceDeregister service_deregister = 101;
+    }
+}
+
+message ServiceRegister {
+    string tag = 1;
+    string payload = 2;
+}
+
+message ServiceDeregister {
+    repeated string service_tag = 1;
+}
+
+message Service {
+    string id = 1;
+    string payload = 2;
+    string endpoint = 3;
+}

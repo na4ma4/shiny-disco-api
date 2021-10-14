@@ -1,0 +1,34 @@
+syntax = "proto3";
+
+package shinydisco.api.v1;
+
+option go_package = "github.com/na4ma4/shiny-disco-api;shiny_disco_api";
+
+import "github.com/na4ma4/shiny-disco-api/common.proto";
+
+service Core {
+    rpc Connect(ConnectRequest) returns (stream Message);
+}
+
+service Server {
+    rpc Discover(DiscoverRequest) returns (stream Service);
+}
+
+message ConnectRequest {
+    // ID is a universally unique client identifier.
+    //
+    // ID MUST be as unique as possible but also supplied by the client.
+    string id = 1;
+
+    // Token is the authentication for an identifier.
+    //
+    // Token is accepted on first request by a new ID and used as verification on all
+    // subsequent connections.
+    string token = 2;
+
+    string endpoint = 3;
+}
+
+message DiscoverRequest {
+    string tag = 1;
+}
